@@ -7,6 +7,16 @@ const {
   deleteUser
 } = require('../controllers/user-controller');
 
+const { updateUser } = require('../controllers/user-controller');
+
+router.put('/:id', updateUser);
+
+const { addFriend } = require('../controllers/user-controller');
+
+router.post('/:userId/friends/:friendId', addFriend);
+
+
+
 // GET & POST at /api/users
 router
   .route('/')

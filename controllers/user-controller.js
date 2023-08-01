@@ -34,6 +34,49 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  //update a user
+  async updateUser(req, res) {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        req.body,
+        { new: true, runValidators: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+
+      res.json(updatedUser);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+//add friend
+
+async addFriend(req, res) {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.params.friendId } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+},
+
+
+
+
   // Delete a user and associated apps
   async deleteUser(req, res) {
     try {
