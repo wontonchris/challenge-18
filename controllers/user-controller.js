@@ -54,6 +54,9 @@ module.exports = {
     }
   },
 
+  //get user by ID and delete
+  
+
 //add friend
 
 async addFriend(req, res) {

@@ -1,5 +1,9 @@
-const {Schema, model,} = require('mongoose');
+const {Schema, Types, model,} = require('mongoose');
 const reactionSchema = require('./Reaction');
+function dateFormat(date) {
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+}
 
 // Schema for Thoughts
 const thoughtSchema = new Schema(
@@ -24,7 +28,7 @@ const thoughtSchema = new Schema(
     },
     {
         toJSON: {
-            virtuals: true,
+            virtual: true,
             getters: true,
         },
         id: false,
